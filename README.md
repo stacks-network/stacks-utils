@@ -64,4 +64,18 @@ const tx = {
 
 ## Units
 
+### Microstacks to Stacks
 
+```jsx
+import { microToStacks } from "stacks-utils";
+
+const stxAmount = microToStacks(1); // 0.000001
+```
+
+### Stacks to Microstacks
+
+```jsx
+import { stacksToMicro } from "stacks-utils";
+
+const microStxAmount = stacksToMicro(0.000001); // 1
+```
