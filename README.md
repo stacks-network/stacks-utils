@@ -67,15 +67,15 @@ const tx = {
 ### Microstacks to Stacks
 
 ```jsx
-import { microToStacks } from "stacks-utils";
+import { microToStx } from "stacks-utils";
 
-const stxAmount = microToStacks(1); // 0.000001
+const stxAmount = microToStx(1); // 0.000001
 ```
 
 ### Stacks to Microstacks
 
 ```jsx
-import { stacksToMicro } from "stacks-utils";
+import { stxToMicro } from "stacks-utils";
 
-const microStxAmount = stacksToMicro(0.000001); // 1
+const microStxAmount = stxToMicro(0.000001); // 1
 ```

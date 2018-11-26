@@ -1,8 +1,8 @@
 import { stxToBtc, btcToStx, validateStxAddress } from "./addresses";
 import { decodeRawTx } from "./transactions";
 import {
-  microToStacks,
-  stacksToMicro,
+  microToStx,
+  stxToMicro,
   btcToSatoshis,
   satoshisToBtc,
   toBigInt
@@ -14,8 +14,8 @@ export {
   btcToStx,
   validateStxAddress,
   decodeRawTx,
-  microToStacks,
-  stacksToMicro,
+  microToStx,
+  stxToMicro,
   btcToSatoshis,
   satoshisToBtc,
   toBigInt,
