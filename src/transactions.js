@@ -1,7 +1,7 @@
 import btc from "bitcoinjs-lib";
 import bigi from "bigi";
 import { b58ToC32 } from "c32check";
-import { microToStx } from "./units";
+import { microToStacks } from "./units";
 
 /**
  * getOperationType
@@ -104,7 +104,7 @@ const decodeRawTx = rawTx => {
     consensusHash,
     tokenType,
     tokenAmount: tokenSentBigI,
-    tokenAmountReadable: microToStx(tokenSentBigI.toString()),
+    tokenAmountReadable: microToStacks(tokenSentBigI.toString()),
     memo: scratchData
   };
 };

@@ -2,20 +2,20 @@ import bigi from "bigi";
 import { SATOSHIS_IN_BTC, MICROSTACKS_IN_STACKS } from "./common/constants";
 
 /**
- * microToStx
+ * microToStacks
  *
- * @param {String || Number} microStx - the amount of microstacks to convert
+ * @param {String || Number} amountInMicroStacks - the amount of microStacks to convert
  */
-const microToStx = microStx =>
-  microStx ? Number(microStx) / Math.pow(10, 6) : 0;
+const microToStacks = amountInMicroStacks =>
+  amountInMicroStacks ? Number(amountInMicroStacks) / Math.pow(10, 6) : 0;
 
 /**
- * stxToMicro
+ * stacksToMicro
  *
- * @param {String || Number} stx - the amount of stacks to convert
+ * @param {String || Number} amountInStacks - the amount of stacks to convert
  */
-const stxToMicro = stx =>
-  stx ? Math.floor(Number(stx) * MICROSTACKS_IN_STACKS) : 0;
+const stacksToMicro = amountInStacks =>
+  amountInStacks ? Math.floor(Number(amountInStacks) * MICROSTACKS_IN_STACKS) : 0;
 
 /**
  * btcToSatoshis
@@ -43,4 +43,4 @@ const toBigInt = value =>
     ? bigi.valueOf(Number(value) * 1000000)
     : bigi.fromByteArrayUnsigned(value).multiply(bigi.valueOf(1000000));
 
-export { microToStx, stxToMicro, btcToSatoshis, satoshisToBtc, toBigInt };
+export { microToStacks, stacksToMicro, btcToSatoshis, satoshisToBtc, toBigInt };

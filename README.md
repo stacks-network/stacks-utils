@@ -13,25 +13,25 @@ yarn add stacks-utils
 #### Validate Stacks Address
 
 ```jsx
-import { validateStxAddress } from "stacks-utils";
+import { validateStacksAddress } from "stacks-utils";
 
-const isValid = validateStxAddress(stx);
+const isValid = validateStacksAddress(stacksAddress);
 ```
 
 #### Stacks to Bitcoin
 
 ```jsx
-import { stxToBtc } from "stacks-utils";
+import { stacksToBtc } from "stacks-utils";
 
-const btc = stxToBtc(stx);
+const btcAddress = stacksToBtc(stacksAddress);
 ```
 
 #### Bitcoin to Stacks
 
 ```jsx
-import { btcToStx } from "stacks-utils";
+import { btcToStacks } from "stacks-utils";
 
-const stx = btcToStx(btc);
+const stacksAddress = btcToStacks(btcAddress);
 ```
 
 ## Transactions
@@ -67,15 +67,15 @@ const tx = {
 ### Microstacks to Stacks
 
 ```jsx
-import { microToStx } from "stacks-utils";
+import { microToStacks } from "stacks-utils";
 
-const stxAmount = microToStx(1); // 0.000001
+const stacksAmount = microToStacks(1); // 0.000001
 ```
 
 ### Stacks to Microstacks
 
 ```jsx
-import { stxToMicro } from "stacks-utils";
+import { stacksToMicro } from "stacks-utils";
 
-const microStxAmount = stxToMicro(0.000001); // 1
+const microStacksAmount = stacksToMicro(0.000001); // 1
 ```
