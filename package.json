@@ -1,0 +1,38 @@
+{
+  "name": "stacks-utils",
+  "version": "0.0.4",
+  "description": "Utilities for the Stacks blockchain.",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "clean": "rimraf dist",
+    "format": "echo '\\033[0;32m'💅 Just use prettier'\\033[0m' && prettier --write ./src/**/**/*.{js,md}",
+    "prepare": "yarn clean && yarn build",
+    "size": "bundlesize",
+    "prepublish": "yarn prepare"
+  },
+  "keywords": [
+    "blockstack",
+    "stacks",
+    "blockchain"
+  ],
+  "author": "Blockstack Team",
+  "license": "MIT",
+  "dependencies": {
+    "bigi": "^1.4.2",
+    "bitcoinjs-lib": "^4.0.2",
+    "blockstack": "^18.1.0",
+    "c32check": "^0.0.6",
+    "crypto": "^1.0.1"
+  },
+  "devDependencies": {
+    "bundlesize": "^0.17.0",
+    "microbundle": "^0.7.0",
+    "prettier": "^1.15.2",
+    "rimraf": "^2.6.2"
+  },
+  "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.mjs",
+  "source": "src/index.js"
+}
