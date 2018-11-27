@@ -1,6 +1,6 @@
 {
   "name": "stacks-utils",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Utilities for the Stacks blockchain.",
   "scripts": {
     "build": "microbundle",
