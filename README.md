@@ -41,24 +41,28 @@ const stacksAddress = btcToStacks(btcAddress);
 ```jsx
 import { decodeRawTx } from "stacks-utils";
 
-const tx = decodeRawTx(rawTx);
+(async () => {
+    const tx = await decodeRawTx(rawTx);
+    console.log(tx)
+})
 ```
 
 This will return an object as such:
 
 ```jsx
 const tx = {
-    opcode, // $
-    operation, // TOKEN_TRANSFER
-    consensusHash, // df1631913bbf485ce6a25f26bccfc8d3
-    tokenType, // "STACKS"
-    tokenAmount, // BigInteger
-    tokenAmountReadable, // 0.00001
-    memo, // Message
-    recipient // recipient STX address
-    recipientBitcoinAddress, // recipient BTC address
-    sender, // sender STX address
-    senderBitcoinAddress, // sender BTC address
+    sender,                     // sender STX address
+    senderBitcoinAddress,       // sender BTC address
+    recipient,                  // recipient STX address
+    recipientBitcoinAddress,    // recipient BTC address
+    opcode,                     // $
+    operation,                  // TOKEN_TRANSFER
+    consensusHash,              // df1631913bbf485ce6a25f26bccfc8d3
+    tokenType,                  // "STACKS"
+    tokenAmount,                // BigInteger
+    tokenAmountReadable,        // 0.000001
+    memo,                       // Message
+    fees                        // BTC tx fees in satoshis
 };
 ```
 
