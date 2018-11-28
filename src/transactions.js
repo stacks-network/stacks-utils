@@ -86,7 +86,7 @@ const getOperationType = opCode => {
   if (opCode === "!") {
     return "NAMESPACE_READY";
   }
-  console.error("stacks-utils: getOperationType -- Unknown Stacks Operation");
+  // console.error("stacks-utils: getOperationType -- Unknown Stacks Operation");
   return null;
 };
 
