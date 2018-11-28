@@ -1,5 +1,8 @@
 # Stacks Utilities
-
+[![npm version](https://img.shields.io/bundlephobia/minzip/stacks-utils.svg)](https://npmjs.com/stacks-utils)
+[![npm version](https://img.shields.io/npm/dm/stacks-utils.svg)](https://npmjs.com/stacks-utils)
+[![npm version](https://img.shields.io/npm/v/stacks-utils.svg)](https://npmjs.com/stacks-utils)
+[![npm license](https://img.shields.io/npm/l/stacks-utils.svg)](https://npmjs.com/stacks-utils)
 ## Getting started
 
 ```

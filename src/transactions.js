@@ -97,13 +97,15 @@ const getOperationType = opCode => {
  * and provide stacks transaction information.
  *
  * @param {String} rawTx - the hex tx to decode
+ * @param {Boolean} fetchFees - bool to fetch fees or not
  * @returns {Promise} tx - the decompiled Stacks transaction
  */
-const decodeRawTx = async rawTx => {
+const decodeRawTx = async (rawTx, fetchFees = true) => {
   const tx = btc.Transaction.fromHex(rawTx);
   const data = btc.script.decompile(tx.outs[0].script)[1];
+
   if (!data.slice) {
-    console.error("stacks-utils: decodeRawTx -- cannot slice data.");
+    // not a blockstack transaction
     return;
   }
   const operationType = data.slice(2, 3).toString();
@@ -139,7 +141,7 @@ const decodeRawTx = async rawTx => {
   const senderStacksAddress = b58ToC32(senderBitcoinAddress);
 
   // fetch our fees
-  const fees = await getFees(tx);
+  const fees = fetchFees ? await getFees(tx) : undefined;
 
   return {
     sender: senderStacksAddress,
