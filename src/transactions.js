@@ -109,6 +109,10 @@ const decodeRawTx = async (rawTx, fetchFees = true) => {
     return;
   }
   const operationType = data.slice(2, 3).toString();
+  if (getOperationType(operationType) === null) {
+    // not a currently supported operation
+    return;
+  }
   const consensusHash = data.slice(3, 19).toString("hex");
 
   const tokenTypeHex = data.slice(19, 38).toString("hex");
@@ -130,7 +134,9 @@ const decodeRawTx = async (rawTx, fetchFees = true) => {
   const recipientC32Address = b58ToC32(recipientBitcoinAddress);
 
   const inputData = btc.script.decompile(tx.ins[0].script);
+
   const hash = btc.crypto.hash160(inputData[inputData.length - 1]);
+
   const isPubKey = btc.script.isCanonicalPubKey(
     inputData[inputData.length - 1]
   );
