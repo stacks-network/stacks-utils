@@ -34,17 +34,17 @@ const isValid = validateStacksAddress(stacksAddress);
 #### Stacks to Bitcoin
 
 ```jsx
-import { stacksToBtc } from "stacks-utils";
+import { stacksAddressToBtcAddress } from "stacks-utils";
 
-const btcAddress = stacksToBtc(stacksAddress);
+const btcAddress = stacksAddressToBtcAddress(stacksAddress);
 ```
 
 #### Bitcoin to Stacks
 
 ```jsx
-import { btcToStacks } from "stacks-utils";
+import { btcAddressToStacksAddress } from "stacks-utils";
 
-const stacksAddress = btcToStacks(btcAddress);
+const stacksAddress = btcAddressToStacksAddress(btcAddress);
 ```
 
 ## Transactions
