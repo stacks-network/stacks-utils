@@ -105,7 +105,7 @@ See: [https://docs.blockstack.org/core/wire-format.html](https://docs.blockstack
 import { getOperationType } from "stacks-utils";
 
 const opcode = "$";
-const operaction = getOperationType(opcode); // TOKEN_TRANSFER
+const operation = getOperationType(opcode); // TOKEN_TRANSFER
 ```
 
 ## Data Fetching
