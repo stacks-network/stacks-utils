@@ -170,8 +170,10 @@ const decodeRawTx = async (rawTx, fetchFees = true) => {
  * This will decode an array of BTC transactions that contain a hex key.
  *
  * @param {Array} txs - the Array of transactions
+ * @param {Boolean} fetchFees - bool to fetch fees or not
+ * @returns {Promise} txs - the array of decompiled Stacks transaction
  */
-const decodeRawTxs = async txs => {
+const decodeRawTxs = async (txs, fetchFees) => {
   if (!txs.length) {
     return [];
   }
