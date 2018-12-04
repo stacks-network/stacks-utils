@@ -12,6 +12,11 @@ import {
   toBigInt
 } from "./units";
 import { SATOSHIS_IN_BTC, MICROSTACKS_IN_STACKS } from "./common/constants";
+import {
+  fetchBtcAddressData,
+  fetchStacksAddressData,
+  fetchStacksAddressDetails
+} from "./fetch";
 
 export {
   stacksAddressToBtcAddress,
@@ -23,6 +28,9 @@ export {
   btcToSatoshis,
   satoshisToBtc,
   toBigInt,
+  fetchBtcAddressData,
+  fetchStacksAddressData,
+  fetchStacksAddressDetails,
   SATOSHIS_IN_BTC,
   MICROSTACKS_IN_STACKS
 };

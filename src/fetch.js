@@ -68,7 +68,7 @@ const fetchStacksAddressData = async stacksAddress => {
   const txs = btcData && btcData.txs && btcData.txs.length ? btcData.txs : [];
 
   // decode the raw tx to get at the stacks data
-  const transactionsWithStacksData = await decodeRawTxs(txs);
+  const transactionsWithStacksData = await decodeRawTxs(txs, false);
 
   // determine if the stacks transaction is valid or not (accepted by Blockstack Core)
   const transactionsWithStacksDataWithInvalidState = transactionsWithStacksData.map(
@@ -102,6 +102,10 @@ const fetchStacksAddressData = async stacksAddress => {
 
   return {
     ...data,
+    balances: {
+      confirmed: btcData.balance,
+      unconfimed: btcData.unconfirmed_balance
+    },
     transactions
   };
 };

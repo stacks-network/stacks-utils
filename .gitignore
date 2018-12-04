@@ -2,3 +2,5 @@
 dist
 node_modules
 hidden
+demo/node_modules
+demo/.next

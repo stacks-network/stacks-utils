@@ -181,7 +181,7 @@ const decodeRawTxs = async (txs, fetchFees) => {
     txs.map(async tx => {
       if (!tx.hex) return;
       try {
-        const transaction = await decodeRawTx(tx.hex, false); // false because we get fees from blockcypher
+        const transaction = await decodeRawTx(tx.hex, fetchFees); // false because we get fees from blockcypher
         if (!transaction) return; // not a valid stacks/blockstack transaction
 
         // only return token transfers
@@ -190,7 +190,7 @@ const decodeRawTxs = async (txs, fetchFees) => {
         }
         return {
           ...transaction,
-          fees: tx.fees,
+          fees: fetchFees ? transaction.fees : tx.fees,
           confirmations: tx.confirmations,
           block_height: tx.block_height,
           block_hash: tx.block_hash,
