@@ -1,0 +1,21 @@
+{
+  "name": "stacks-utils-demo",
+  "version": "1.0.0",
+  "description": "Playground to show uses of stacks-utils",
+  "main": "pages/index.js",
+  "scripts": {
+    "dev": "next dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thomas Osmonson",
+  "license": "MIT",
+  "dependencies": {
+    "blockstack-ui": "^0.0.52",
+    "lodash.debounce": "^4.0.8",
+    "next": "^7.0.2",
+    "polished": "^2.3.0",
+    "react": "^16.7.0-alpha.2",
+    "react-dom": "^16.7.0-alpha.2",
+    "styled-components": "^4.1.2"
+  }
+}
