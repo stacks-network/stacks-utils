@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Input, theme, Box, Type, Scrollbars } from "blockstack-ui";
-import { fetchStacksAddressData, validateStacksAddress } from "../../../src";
+import {
+  fetchStacksAddressData,
+  validateStacksAddress
+} from "stacks-utils/dist/index.umd";
 import debounce from "lodash.debounce";
 const AsyncStacksInput = ({
   fn,
