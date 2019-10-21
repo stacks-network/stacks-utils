@@ -1,4 +1,4 @@
-const API_URL = "https://blockstack-explorer-api.herokuapp.com";
+const API_URL = "https://explorer-api.blockstack.xyz";
 const BSKPK =
   "03956cd9ba758cb7be56d0f8d52476673814d8dbb3c1a728d73a36b3b9268f9cba";
 const PATH = `m/44'/5757'/0'/0/0`;
