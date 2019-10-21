@@ -52,11 +52,17 @@ const WALLET_TYPES = {
   TREZOR: "wallet_types/TREZOR"
 };
 
+/**
+ * URLS
+ */
+const API_URL = "https://explorer-api.blockstack.org";
+
 export {
   SATOSHIS_IN_BTC,
   MICROSTACKS_IN_STACKS,
   PATH,
   UTXO_SERVICE_URI,
   ERRORS,
-  WALLET_TYPES
+  WALLET_TYPES,
+  API_URL
 };

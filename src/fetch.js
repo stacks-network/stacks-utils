@@ -1,6 +1,6 @@
 import { decodeRawTxs } from "./transactions";
 import { stacksAddressToBtcAddress } from "./addresses";
-import { API_URL } from "../hidden/common/constants";
+import { API_URL } from "./common/constants";
 import { fetchJSON } from "./common/lib";
 
 /**
