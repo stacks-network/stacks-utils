@@ -55,7 +55,7 @@ const WALLET_TYPES = {
 /**
  * URLS
  */
-const API_URL = "https://explorer-api.blockstack.org";
+const API_URL = "https://explorer-api.blockstack.xyz";
 
 export {
   SATOSHIS_IN_BTC,
