@@ -1,19 +1,19 @@
 /**
  * Units
  */
-const SATOSHIS_IN_BTC = 100000000;
-const MICROSTACKS_IN_STACKS = 1000000;
+export const SATOSHIS_IN_BTC = 100000000;
+export const MICROSTACKS_IN_STACKS = 1000000;
 
 /**
  *
  */
-const PATH = `m/44'/5757'/0'/0/0`;
-const UTXO_SERVICE_URI = "https://utxo.blockstack.org";
+export const PATH = `m/44'/5757'/0'/0/0`;
+export const UTXO_SERVICE_URI = "https://utxo.blockstack.org";
 
 /**
  * Errors
  */
-const ERRORS = {
+export const ERRORS = {
   // not enough btc for fees
   INSUFFICIENT_BTC_BALANCE: {
     error: true,
@@ -46,7 +46,7 @@ const ERRORS = {
   })
 };
 
-const WALLET_TYPES = {
+export const WALLET_TYPES = {
   WATCH_ONLY: "wallet_types/WATCH_ONLY",
   LEDGER: "wallet_types/LEDGER",
   TREZOR: "wallet_types/TREZOR"
@@ -55,14 +55,4 @@ const WALLET_TYPES = {
 /**
  * URLS
  */
-const API_URL = "https://explorer-api.blockstack.xyz";
-
-export {
-  SATOSHIS_IN_BTC,
-  MICROSTACKS_IN_STACKS,
-  PATH,
-  UTXO_SERVICE_URI,
-  ERRORS,
-  WALLET_TYPES,
-  API_URL
-};
+export const API_URL = "https://explorer-api.blockstack.xyz";

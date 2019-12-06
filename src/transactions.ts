@@ -100,7 +100,7 @@ const getOperationType = opCode => {
  * @param {Boolean} fetchFees - bool to fetch fees or not
  * @returns {Promise} tx - the decompiled Stacks transaction
  */
-const decodeRawTx = async (rawTx, fetchFees = true) => {
+export const decodeRawTx = async (rawTx, fetchFees = true) => {
   const tx = btc.Transaction.fromHex(rawTx);
   const data = btc.script.decompile(tx.outs[0].script)[1];
 
@@ -164,6 +164,7 @@ const decodeRawTx = async (rawTx, fetchFees = true) => {
     fees
   };
 };
+
 /**
  * decodeRawTxs
  *
@@ -173,7 +174,7 @@ const decodeRawTx = async (rawTx, fetchFees = true) => {
  * @param {Boolean} fetchFees - bool to fetch fees or not
  * @returns {Promise} txs - the array of decompiled Stacks transaction
  */
-const decodeRawTxs = async (txs, fetchFees) => {
+export const decodeRawTxs = async (txs, fetchFees) => {
   if (!txs.length) {
     return [];
   }
@@ -214,4 +215,3 @@ const decodeRawTxs = async (txs, fetchFees) => {
       pending: Number(tx.confirmations) < 7 // blockstack core will either accept or deny a stx tx at 7+ confirmations from the bitcoin blockchain
     }));
 };
-export { decodeRawTx, decodeRawTxs };
