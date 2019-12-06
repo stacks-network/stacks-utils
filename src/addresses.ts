@@ -1,4 +1,4 @@
-import { c32ToB58, b58ToC32, c32addressDecode } from "c32check";
+import { c32ToB58, b58ToC32, c32addressDecode } from 'c32check';
 
 /**
  * stacksAddressToBtcAddress
@@ -6,7 +6,8 @@ import { c32ToB58, b58ToC32, c32addressDecode } from "c32check";
  *
  * @param {String} stacksAddress - the stacks address to convert
  */
-export const stacksAddressToBtcAddress = stacksAddress => c32ToB58(stacksAddress);
+export const stacksAddressToBtcAddress = stacksAddress =>
+  c32ToB58(stacksAddress);
 
 /**
  * btcAddressToStacksAddress

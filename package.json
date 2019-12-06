@@ -2,11 +2,12 @@
   "name": "@blockstack/stacks-utils",
   "version": "0.1.5",
   "description": "Utilities for the Stacks blockchain.",
+  "prettier": "@blockstack/prettier-config",
   "scripts": {
     "build": "microbundle",
     "dev": "microbundle watch",
     "clean": "rimraf dist",
-    "format": "echo '\\033[0;32m'💅 Just use prettier'\\033[0m' && prettier --write ./src/**/**/*.{js,md}",
+    "format": "echo '\\033[0;32m'💅 Just use prettier'\\033[0m' && prettier --write ./src/**/**/*.{ts,md}",
     "prepare": "yarn clean && yarn build",
     "size": "bundlesize",
     "prepublish": "yarn prepare"
@@ -26,6 +27,9 @@
     "crypto": "^1.0.1"
   },
   "devDependencies": {
+    "@blockstack/prettier-config": "^0.0.4",
+    "@types/bigi": "^1.4.2",
+    "@types/bitcoinjs-lib": "^5.0.0",
     "bundlesize": "^0.17.0",
     "microbundle": "^0.7.0",
     "prettier": "^1.15.2",

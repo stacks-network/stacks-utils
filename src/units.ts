@@ -1,5 +1,5 @@
-import bigi from "bigi";
-import { SATOSHIS_IN_BTC, MICROSTACKS_IN_STACKS } from "./common/constants";
+import bigi from 'bigi';
+import { SATOSHIS_IN_BTC, MICROSTACKS_IN_STACKS } from './common/constants';
 
 /**
  * microToStacks
@@ -15,7 +15,9 @@ export const microToStacks = amountInMicroStacks =>
  * @param {String || Number} amountInStacks - the amount of stacks to convert
  */
 export const stacksToMicro = amountInStacks =>
-  amountInStacks ? Math.floor(Number(amountInStacks) * MICROSTACKS_IN_STACKS) : 0;
+  amountInStacks
+    ? Math.floor(Number(amountInStacks) * MICROSTACKS_IN_STACKS)
+    : 0;
 
 /**
  * btcToSatoshis
