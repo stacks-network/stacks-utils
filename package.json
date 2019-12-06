@@ -1,5 +1,5 @@
 {
-  "name": "stacks-utils",
+  "name": "@blockstack/stacks-utils",
   "version": "0.1.5",
   "description": "Utilities for the Stacks blockchain.",
   "scripts": {
