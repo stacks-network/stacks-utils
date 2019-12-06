@@ -21,8 +21,8 @@
   "license": "MIT",
   "dependencies": {
     "bigi": "^1.4.2",
-    "bitcoinjs-lib": "^4.0.2",
-    "blockstack": "^18.1.0",
+    "bitcoinjs-lib": "^5.1.6",
+    "blockstack": "^19.3.0",
     "c32check": "^0.0.6",
     "crypto": "^1.0.1"
   },
@@ -30,10 +30,10 @@
     "@blockstack/prettier-config": "^0.0.4",
     "@types/bigi": "^1.4.2",
     "@types/bitcoinjs-lib": "^5.0.0",
-    "bundlesize": "^0.17.0",
-    "microbundle": "^0.7.0",
+    "bundlesize": "^0.18.0",
+    "microbundle": "^0.11.0",
     "prettier": "^1.15.2",
-    "rimraf": "^2.6.2"
+    "rimraf": "^3.0.0"
   },
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
