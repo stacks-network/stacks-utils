@@ -6,7 +6,7 @@ import { SATOSHIS_IN_BTC, MICROSTACKS_IN_STACKS } from './common/constants';
  *
  * @param {String || Number} amountInMicroStacks - the amount of microStacks to convert
  */
-export const microToStacks = amountInMicroStacks =>
+export const microToStacks = (amountInMicroStacks: string | number) =>
   amountInMicroStacks ? Number(amountInMicroStacks) / Math.pow(10, 6) : 0;
 
 /**
@@ -14,7 +14,7 @@ export const microToStacks = amountInMicroStacks =>
  *
  * @param {String || Number} amountInStacks - the amount of stacks to convert
  */
-export const stacksToMicro = amountInStacks =>
+export const stacksToMicro = (amountInStacks: string | number) =>
   amountInStacks
     ? Math.floor(Number(amountInStacks) * MICROSTACKS_IN_STACKS)
     : 0;
@@ -24,7 +24,7 @@ export const stacksToMicro = amountInStacks =>
  *
  * @param {String || Number} amountInBtc - the amount of btc to convert
  */
-export const btcToSatoshis = amountInBtc =>
+export const btcToSatoshis = (amountInBtc: string | number) =>
   amountInBtc ? Number(amountInBtc) * SATOSHIS_IN_BTC : 0;
 
 /**
@@ -32,7 +32,7 @@ export const btcToSatoshis = amountInBtc =>
  *
  * @param {String || Number} amountInSatoshis - the amount of satoshis to convert
  */
-export const satoshisToBtc = amountInSatoshis =>
+export const satoshisToBtc = (amountInSatoshis: string | number) =>
   amountInSatoshis ? Number(amountInSatoshis) / SATOSHIS_IN_BTC : 0;
 
 /**
@@ -40,10 +40,9 @@ export const satoshisToBtc = amountInSatoshis =>
  *
  * @param {String || Number} value - the value to convert to a bigint
  */
-export const toBigInt = value =>
+export const toBigInt = (value: string | number) =>
   Number(value) < 1
     ? bigi.valueOf(Number(value) * 1000000)
     : bigi.fromByteArrayUnsigned(value).multiply(bigi.valueOf(1000000));
 
-export const sumUTXOs = utxos => utxos.reduce((agg, x) => agg + x.value, 0);
-
+export const sumUTXOs = (utxos: any[]) => utxos.reduce((agg, x) => agg + x.value, 0);

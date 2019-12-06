@@ -10,7 +10,7 @@ import { microToStacks } from './units';
  * @param {Number} index
  * @returns {Promise} the Number represents the value of each output of a given hash
  */
-const lookupValue = async (hashBuffer, index) => {
+const lookupValue = async (hashBuffer: string, index: number) => {
   try {
     const txHash = Buffer.from(hashBuffer)
       .reverse()
@@ -52,7 +52,7 @@ const getFees = async tx => {
  * @param {String} opCode - the ascii character
  * @returns {String} operation - the readable operation for a given opCode
  */
-const getOperationType = opCode => {
+const getOperationType = (opCode: string) => {
   if (opCode === '$') {
     return 'TOKEN_TRANSFER';
   }
@@ -100,7 +100,7 @@ const getOperationType = opCode => {
  * @param {Boolean} fetchFees - bool to fetch fees or not
  * @returns {Promise} tx - the decompiled Stacks transaction
  */
-export const decodeRawTx = async (rawTx, fetchFees = true) => {
+export const decodeRawTx = async (rawTx: string, fetchFees = true) => {
   const tx = btc.Transaction.fromHex(rawTx);
   const data = btc.script.decompile(tx.outs[0].script)[1];
 

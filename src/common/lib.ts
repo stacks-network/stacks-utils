@@ -5,7 +5,7 @@
  *
  * @param {String} path - the path/url to fetch
  */
-const fetchJSON = async path => {
+export const fetchJSON = async (path: string) => {
   try {
     const res = await fetch(path);
     return res.json();
@@ -13,6 +13,3 @@ const fetchJSON = async path => {
     throw e.message;
   }
 };
-
-
-export {fetchJSON}

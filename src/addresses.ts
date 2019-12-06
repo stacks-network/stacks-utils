@@ -6,7 +6,7 @@ import { c32ToB58, b58ToC32, c32addressDecode } from 'c32check';
  *
  * @param {String} stacksAddress - the stacks address to convert
  */
-export const stacksAddressToBtcAddress = stacksAddress =>
+export const stacksAddressToBtcAddress = (stacksAddress: string) =>
   c32ToB58(stacksAddress);
 
 /**
@@ -15,14 +15,14 @@ export const stacksAddressToBtcAddress = stacksAddress =>
  *
  * @param {String} btcAddress - the btc address to convert
  */
-export const btcAddressToStacksAddress = btcAddress => b58ToC32(btcAddress);
+export const btcAddressToStacksAddress = (btcAddress: string) => b58ToC32(btcAddress);
 
 /**
  * validateStacksAddress
  *
  * @param {String} stacksAddress - the STX address to validate
  */
-export const validateStacksAddress = stacksAddress => {
+export const validateStacksAddress = (stacksAddress: string) => {
   let valid = false;
   try {
     if (c32addressDecode(stacksAddress)) {
