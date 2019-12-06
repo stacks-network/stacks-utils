@@ -10,7 +10,8 @@
     "format": "echo '\\033[0;32m'💅 Just use prettier'\\033[0m' && prettier --write ./src/**/**/*.{ts,md}",
     "prepare": "yarn clean && yarn build",
     "size": "bundlesize",
-    "prepublish": "yarn prepare"
+    "prepublish": "yarn prepare",
+    "test": "jest"
   },
   "keywords": [
     "blockstack",
@@ -30,10 +31,13 @@
     "@blockstack/prettier-config": "^0.0.4",
     "@types/bigi": "^1.4.2",
     "@types/bitcoinjs-lib": "^5.0.0",
+    "@types/jest": "^24.0.23",
     "bundlesize": "^0.18.0",
+    "jest": "^24.9.0",
     "microbundle": "^0.11.0",
     "prettier": "^1.15.2",
-    "rimraf": "^3.0.0"
+    "rimraf": "^3.0.0",
+    "ts-jest": "^24.2.0"
   },
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
