@@ -24,7 +24,7 @@
     "bigi": "^1.4.2",
     "bitcoinjs-lib": "^5.1.6",
     "blockstack": "^19.3.0",
-    "c32check": "^0.0.6",
+    "c32check": "^1.0.1",
     "crypto": "^1.0.1"
   },
   "devDependencies": {
