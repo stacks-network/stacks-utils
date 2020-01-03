@@ -29,8 +29,13 @@ const validateStacksAddress = stacksAddress => {
     }
   } catch (e) {
     valid = false;
+    throw new Error("Not a valid Stacks address.");
   }
   return valid;
 };
 
-export { stacksAddressToBtcAddress, btcAddressToStacksAddress, validateStacksAddress };
+export {
+  stacksAddressToBtcAddress,
+  btcAddressToStacksAddress,
+  validateStacksAddress
+};

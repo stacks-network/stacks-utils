@@ -164,5 +164,54 @@ const decodeRawTx = async (rawTx, fetchFees = true) => {
     fees
   };
 };
+/**
+ * decodeRawTxs
+ *
+ * This will decode an array of BTC transactions that contain a hex key.
+ *
+ * @param {Array} txs - the Array of transactions
+ * @param {Boolean} fetchFees - bool to fetch fees or not
+ * @returns {Promise} txs - the array of decompiled Stacks transaction
+ */
+const decodeRawTxs = async (txs, fetchFees) => {
+  if (!txs.length) {
+    return [];
+  }
+  const items = await Promise.all(
+    txs.map(async tx => {
+      if (!tx.hex) return;
+      try {
+        const transaction = await decodeRawTx(tx.hex, fetchFees); // false because we get fees from blockcypher
+        if (!transaction) return; // not a valid stacks/blockstack transaction
 
-export { decodeRawTx };
+        // only return token transfers
+        if (transaction.opcode !== "$") {
+          return;
+        }
+        return {
+          ...transaction,
+          fees: fetchFees ? transaction.fees : tx.fees,
+          confirmations: tx.confirmations,
+          block_height: tx.block_height,
+          block_hash: tx.block_hash,
+          inputs: tx.inputs,
+          outputs: tx.outputs,
+          time: tx.time,
+          confirmed: tx.confirmed,
+          received: tx.received,
+          txid: tx.hash
+        };
+      } catch (e) {
+        console.error(e);
+      }
+    })
+  );
+
+  return items
+    .filter(item => item) // remove null items
+    .map(tx => ({
+      ...tx,
+      pending: Number(tx.confirmations) < 7 // blockstack core will either accept or deny a stx tx at 7+ confirmations from the bitcoin blockchain
+    }));
+};
+export { decodeRawTx, decodeRawTxs };

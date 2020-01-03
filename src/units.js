@@ -43,4 +43,6 @@ const toBigInt = value =>
     ? bigi.valueOf(Number(value) * 1000000)
     : bigi.fromByteArrayUnsigned(value).multiply(bigi.valueOf(1000000));
 
-export { microToStacks, stacksToMicro, btcToSatoshis, satoshisToBtc, toBigInt };
+const sumUTXOs = utxos => utxos.reduce((agg, x) => agg + x.value, 0);
+
+export { microToStacks, stacksToMicro, btcToSatoshis, satoshisToBtc, toBigInt, sumUTXOs };

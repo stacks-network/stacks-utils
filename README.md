@@ -1,8 +1,10 @@
 # Stacks Utilities
+
 [![npm version](https://img.shields.io/bundlephobia/minzip/stacks-utils.svg)](https://npmjs.com/stacks-utils)
 [![npm version](https://img.shields.io/npm/dm/stacks-utils.svg)](https://npmjs.com/stacks-utils)
 [![npm version](https://img.shields.io/npm/v/stacks-utils.svg)](https://npmjs.com/stacks-utils)
 [![npm license](https://img.shields.io/npm/l/stacks-utils.svg)](https://npmjs.com/stacks-utils)
+
 ## Getting started
 
 ```
@@ -10,6 +12,14 @@ npm install stacks-utils
 # or
 yarn add stacks-utils
 ```
+
+## Table of Contents
+
+- Addresses
+- Transactions
+- Hardware Wallets
+- Data Fetching
+- Units
 
 ## Addresses
 
@@ -24,17 +34,17 @@ const isValid = validateStacksAddress(stacksAddress);
 #### Stacks to Bitcoin
 
 ```jsx
-import { stacksToBtc } from "stacks-utils";
+import { stacksAddressToBtcAddress } from "stacks-utils";
 
-const btcAddress = stacksToBtc(stacksAddress);
+const btcAddress = stacksAddressToBtcAddress(stacksAddress);
 ```
 
 #### Bitcoin to Stacks
 
 ```jsx
-import { btcToStacks } from "stacks-utils";
+import { btcAddressToStacksAddress } from "stacks-utils";
 
-const stacksAddress = btcToStacks(btcAddress);
+const stacksAddress = btcAddressToStacksAddress(btcAddress);
 ```
 
 ## Transactions
@@ -44,29 +54,84 @@ const stacksAddress = btcToStacks(btcAddress);
 ```jsx
 import { decodeRawTx } from "stacks-utils";
 
-(async () => {
-    const tx = await decodeRawTx(rawTx);
-    console.log(tx)
-})
+const fetchFees = false; // if true, the BTC fees will be fetched and calculated
+
+async () => {
+  const tx = await decodeRawTx(rawTx, fetchFees);
+  console.log(tx);
+};
 ```
 
 This will return an object as such:
 
 ```jsx
 const tx = {
-    sender,                     // sender STX address
-    senderBitcoinAddress,       // sender BTC address
-    recipient,                  // recipient STX address
-    recipientBitcoinAddress,    // recipient BTC address
-    opcode,                     // $
-    operation,                  // TOKEN_TRANSFER
-    consensusHash,              // df1631913bbf485ce6a25f26bccfc8d3
-    tokenType,                  // "STACKS"
-    tokenAmount,                // BigInteger
-    tokenAmountReadable,        // 0.000001
-    memo,                       // Message
-    fees                        // BTC tx fees in satoshis
+  sender, // sender STX address
+  senderBitcoinAddress, // sender BTC address
+  recipient, // recipient STX address
+  recipientBitcoinAddress, // recipient BTC address
+  opcode, // $
+  operation, // TOKEN_TRANSFER
+  consensusHash, // df1631913bbf485ce6a25f26bccfc8d3
+  tokenType, // "STACKS"
+  tokenAmount, // BigInteger
+  tokenAmountReadable, // 0.000001
+  memo, // Message
+  fees // BTC tx fees in satoshis (if fetchFees = true)
 };
+```
+
+### Decode an array of transactions
+
+This is mostly to be used in conjunction with `fetchBtcAddressData`. This will take an array of BTC transactions (with a `hex` key in each object) and decode the raw transaction and combine the two.
+
+```jsx
+import { decodeRawTxs } from "stacks-utils";
+
+const fetchFees = false; // if true, the BTC fees will be fetched and calculated
+
+(async () => {
+    const txs = [...];
+    const transactions = await decodeRawTx(txs, fetchFees);
+    console.log(transactions)
+})
+```
+
+### Get readable operation type
+
+See: [https://docs.blockstack.org/core/wire-format.html](https://docs.blockstack.org/core/wire-format.html)
+
+```jsx
+import { getOperationType } from "stacks-utils";
+
+const opcode = "$";
+const operation = getOperationType(opcode); // TOKEN_TRANSFER
+```
+
+## Data Fetching
+
+### Fetch all data associated with a Stacks Address
+
+```jsx
+import { fetchStacksAddressData } from "stacks-utils";
+
+const data = await fetchStacksAddressData(stacksAddress);
+```
+
+### Fetch Stacks Address data from the Blockstack Explorer API
+
+```jsx
+import { fetchStacksAddressDetails } from "stacks-utils";
+
+const data = await fetchStacksAddressDetails(stacksAddress);
+```
+
+### Fetch all data associated with a BTC Address
+
+```jsx
+import { fetchBtcAddressData } from "stacks-utils";
+
+const data = await fetchBtcAddressData(btcAddress);
 ```
 
 ## Units
