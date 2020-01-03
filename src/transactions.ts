@@ -186,7 +186,7 @@ export const decodeRawTxs = async (txs, fetchFees) => {
         if (!transaction) return; // not a valid stacks/blockstack transaction
 
         // only return token transfers
-        if (transaction.opcode !== "$") {
+        if (transaction.opcode !== '$') {
           return;
         }
         return {
@@ -200,7 +200,7 @@ export const decodeRawTxs = async (txs, fetchFees) => {
           time: tx.time,
           confirmed: tx.confirmed,
           received: tx.received,
-          txid: tx.hash
+          txid: tx.hash,
         };
       } catch (e) {
         console.error(e);
@@ -212,6 +212,6 @@ export const decodeRawTxs = async (txs, fetchFees) => {
     .filter(item => item) // remove null items
     .map(tx => ({
       ...tx,
-      pending: Number(tx.confirmations) < 7 // blockstack core will either accept or deny a stx tx at 7+ confirmations from the bitcoin blockchain
+      pending: Number(tx.confirmations) < 7, // blockstack core will either accept or deny a stx tx at 7+ confirmations from the bitcoin blockchain
     }));
 };

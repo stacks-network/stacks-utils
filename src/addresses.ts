@@ -15,7 +15,8 @@ export const stacksAddressToBtcAddress = (stacksAddress: string) =>
  *
  * @param {String} btcAddress - the btc address to convert
  */
-export const btcAddressToStacksAddress = (btcAddress: string) => b58ToC32(btcAddress);
+export const btcAddressToStacksAddress = (btcAddress: string) =>
+  b58ToC32(btcAddress);
 
 /**
  * validateStacksAddress
@@ -30,7 +31,7 @@ export const validateStacksAddress = (stacksAddress: string) => {
     }
   } catch (e) {
     valid = false;
-    throw new Error("Not a valid Stacks address.");
+    throw new Error('Not a valid Stacks address.');
   }
   return valid;
 };

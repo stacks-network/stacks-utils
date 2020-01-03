@@ -1,11 +1,11 @@
-import { stacksAddressToBtcAddress } from "./addresses";
-import { toBigInt, sumUTXOs } from "./units";
-import { network, transactions, config } from "blockstack";
-import { ERRORS, PATH, WALLET_TYPES } from "./common/constants";
-import Transport from "@ledgerhq/hw-transport-node-hid";
-import btc from "bitcoinjs-lib";
-import { TrezorSigner } from "blockstack-trezor";
-import { LedgerSigner } from "blockstack-ledger";
+import { stacksAddressToBtcAddress } from './addresses';
+import { toBigInt, sumUTXOs } from './units';
+import { network, transactions, config } from 'blockstack';
+import { ERRORS, PATH, WALLET_TYPES } from './common/constants';
+import Transport from '@ledgerhq/hw-transport-node-hid';
+import btc from 'bitcoinjs-lib';
+import { TrezorSigner } from 'blockstack-trezor';
+import { LedgerSigner } from 'blockstack-ledger';
 
 /**
  * prepareTransaction
@@ -25,14 +25,14 @@ const prepareTransaction = async (
   recipientAddress,
   amount,
   walletType,
-  memo = ""
+  memo = ''
 ) => {
   // generate our btc addresses for sender and recipient
   const senderBtcAddress = stacksAddressToBtcAddress(senderAddress);
   const recipientBtcAddress = stacksAddressToBtcAddress(recipientAddress);
 
   // define token type (always stacks)
-  const tokenType = "STACKS";
+  const tokenType = 'STACKS';
 
   const tokenAmount = toBigInt(amount); // convert to bigi
 
@@ -72,7 +72,7 @@ const prepareTransaction = async (
       ...ERRORS.INSUFFICIENT_BTC_BALANCE,
       estimate,
       btcBalance,
-      difference: estimate - btcBalance
+      difference: estimate - btcBalance,
     };
   }
   // not enough stacks (should be impossible to get here)
@@ -96,7 +96,7 @@ const prepareTransaction = async (
     btcBalance,
     accountStatus,
     currentAccountBalance,
-    blockHeight
+    blockHeight,
   };
 };
 
@@ -116,7 +116,7 @@ const generateTransaction = async (
   recipientAddress,
   amount,
   walletType,
-  memo = ""
+  memo = ''
 ) => {
   try {
     const tx = await prepareTransaction(
@@ -151,7 +151,7 @@ const generateTransaction = async (
     );
     return {
       fee: tx.estimate,
-      rawTx
+      rawTx,
     };
   } catch (e) {
     await Promise.reject(ERRORS.TRANSACTION_ERROR(e.message));
@@ -165,10 +165,10 @@ const generateTransaction = async (
  */
 const postTransaction = async rawTx => {
   const form = new FormData();
-  form.append("tx", rawTx);
+  form.append('tx', rawTx);
   return fetch(`${config.network.btc.utxoProviderUrl}/pushtx?cors=true`, {
-    method: "POST",
-    body: form
+    method: 'POST',
+    body: form,
   });
 };
 
@@ -183,13 +183,13 @@ const broadcastTransaction = async rawTx => {
   try {
     const response = await postTransaction(rawTx);
     const text = await response.text();
-    const success = text.toLowerCase().indexOf("transaction submitted") >= 0;
+    const success = text.toLowerCase().indexOf('transaction submitted') >= 0;
     if (success) {
       // generate tx hash
       return btc.Transaction.fromHex(rawTx)
         .getHash()
         .reverse()
-        .toString("hex"); // big_endian
+        .toString('hex'); // big_endian
     } else {
       await Promise.reject(
         `Broadcast transaction failed with message: ${text}`
@@ -204,5 +204,5 @@ export {
   prepareTransaction,
   generateTransaction,
   postTransaction,
-  broadcastTransaction
+  broadcastTransaction,
 };

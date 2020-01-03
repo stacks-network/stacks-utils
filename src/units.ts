@@ -43,6 +43,9 @@ export const satoshisToBtc = (amountInSatoshis: string | number) =>
 export const toBigInt = (value: string | number) =>
   Number(value) < 1
     ? bigi.valueOf(Number(value) * 1000000)
-    : (bigi.fromByteArrayUnsigned(value) as any).multiply(bigi.valueOf(1000000));
+    : (bigi.fromByteArrayUnsigned(value) as any).multiply(
+        bigi.valueOf(1000000)
+      );
 
-export const sumUTXOs = (utxos: any[]) => utxos.reduce((agg, x) => agg + x.value, 0);
+export const sumUTXOs = (utxos: any[]) =>
+  utxos.reduce((agg, x) => agg + x.value, 0);

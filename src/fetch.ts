@@ -1,7 +1,7 @@
-import { decodeRawTxs } from "./transactions";
-import { stacksAddressToBtcAddress } from "./addresses";
-import { API_URL } from "./common/constants";
-import { fetchJSON } from "./common/lib";
+import { decodeRawTxs } from './transactions';
+import { stacksAddressToBtcAddress } from './addresses';
+import { API_URL } from './common/constants';
+import { fetchJSON } from './common/lib';
 
 /**
  * fetchStacksAddressDetails
@@ -58,7 +58,7 @@ const fetchStacksAddressData = async stacksAddress => {
   // fetch data from blockcypher and from the blockstack explorer api
   const promises = await Promise.all([
     fetchBtcAddressData(btcAddress),
-    fetchStacksAddressDetails(stacksAddress)
+    fetchStacksAddressDetails(stacksAddress),
   ]);
   const btcData = promises[0];
   const data = promises[1];
@@ -78,7 +78,7 @@ const fetchStacksAddressData = async stacksAddress => {
         Number(tx.confirmations) >= 7 &&
         data &&
         data.history &&
-        !data.history.find(historical => historical.txid === tx.txid) // if this is true, and has 7+ confirmations, it's an invalid stacks tx
+        !data.history.find(historical => historical.txid === tx.txid), // if this is true, and has 7+ confirmations, it's an invalid stacks tx
     })
   );
 
@@ -95,7 +95,7 @@ const fetchStacksAddressData = async stacksAddress => {
         {};
       return {
         ...additionalData,
-        ...thisTx
+        ...thisTx,
       };
     }
   );
@@ -104,14 +104,14 @@ const fetchStacksAddressData = async stacksAddress => {
     ...data,
     balances: {
       confirmed: btcData.balance,
-      unconfimed: btcData.unconfirmed_balance
+      unconfimed: btcData.unconfirmed_balance,
     },
-    transactions
+    transactions,
   };
 };
 
 export {
   fetchStacksAddressData,
   fetchStacksAddressDetails,
-  fetchBtcAddressData
+  fetchBtcAddressData,
 };
