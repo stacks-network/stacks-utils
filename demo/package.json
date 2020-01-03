@@ -14,7 +14,7 @@
   "dependencies": {
     "blockstack-ui": "^0.0.52",
     "lodash.debounce": "^4.0.8",
-    "next": "^7.0.2-canary.40",
+    "next": "^7.0.2",
     "polished": "^2.3.0",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
