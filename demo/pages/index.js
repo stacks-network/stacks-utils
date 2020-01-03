@@ -7,7 +7,7 @@ import {
   fetchStacksAddressDetails,
   microToStacks,
   stacksToMicro
-} from "stacks-utils/dist/index.umd";
+} from "@blockstack/stacks-utils";
 import {
   InputWithTitleAndValueDisplay,
   AsyncStacksInput

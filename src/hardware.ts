@@ -1,11 +1,12 @@
-import { stacksAddressToBtcAddress } from './addresses';
-import { toBigInt, sumUTXOs } from './units';
 import { network, transactions, config } from 'blockstack';
-import { ERRORS, PATH, WALLET_TYPES } from './common/constants';
 import Transport from '@ledgerhq/hw-transport-node-hid';
 import btc from 'bitcoinjs-lib';
 import { TrezorSigner } from 'blockstack-trezor';
 import { LedgerSigner } from 'blockstack-ledger';
+
+import { ERRORS, PATH, WALLET_TYPES } from './common/constants';
+import { stacksAddressToBtcAddress } from './addresses';
+import { toBigInt, sumUTXOs } from './units';
 
 /**
  * prepareTransaction

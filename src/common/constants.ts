@@ -4,9 +4,6 @@
 export const SATOSHIS_IN_BTC = 100000000;
 export const MICROSTACKS_IN_STACKS = 1000000;
 
-/**
- *
- */
 export const PATH = `m/44'/5757'/0'/0/0`;
 export const UTXO_SERVICE_URI = 'https://utxo.blockstack.org';
 

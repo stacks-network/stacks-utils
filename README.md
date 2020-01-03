@@ -8,9 +8,9 @@
 ## Getting started
 
 ```
-npm install stacks-utils
+npm install @blockstack/stacks-utils
 # or
-yarn add stacks-utils
+yarn add @blockstack/stacks-utils
 ```
 
 ## Table of Contents
@@ -26,7 +26,7 @@ yarn add stacks-utils
 #### Validate Stacks Address
 
 ```jsx
-import { validateStacksAddress } from "stacks-utils";
+import { validateStacksAddress } from "@blockstack/stacks-utils";
 
 const isValid = validateStacksAddress(stacksAddress);
 ```
@@ -34,7 +34,7 @@ const isValid = validateStacksAddress(stacksAddress);
 #### Stacks to Bitcoin
 
 ```jsx
-import { stacksAddressToBtcAddress } from "stacks-utils";
+import { stacksAddressToBtcAddress } from "@blockstack/stacks-utils";
 
 const btcAddress = stacksAddressToBtcAddress(stacksAddress);
 ```
@@ -42,7 +42,7 @@ const btcAddress = stacksAddressToBtcAddress(stacksAddress);
 #### Bitcoin to Stacks
 
 ```jsx
-import { btcAddressToStacksAddress } from "stacks-utils";
+import { btcAddressToStacksAddress } from "@blockstack/stacks-utils";
 
 const stacksAddress = btcAddressToStacksAddress(btcAddress);
 ```
@@ -52,7 +52,7 @@ const stacksAddress = btcAddressToStacksAddress(btcAddress);
 #### Decode raw Bitcoin Transaction
 
 ```jsx
-import { decodeRawTx } from "stacks-utils";
+import { decodeRawTx } from "@blockstack/stacks-utils";
 
 const fetchFees = false; // if true, the BTC fees will be fetched and calculated
 
@@ -86,7 +86,7 @@ const tx = {
 This is mostly to be used in conjunction with `fetchBtcAddressData`. This will take an array of BTC transactions (with a `hex` key in each object) and decode the raw transaction and combine the two.
 
 ```jsx
-import { decodeRawTxs } from "stacks-utils";
+import { decodeRawTxs } from "@blockstack/stacks-utils";
 
 const fetchFees = false; // if true, the BTC fees will be fetched and calculated
 
@@ -102,7 +102,7 @@ const fetchFees = false; // if true, the BTC fees will be fetched and calculated
 See: [https://docs.blockstack.org/core/wire-format.html](https://docs.blockstack.org/core/wire-format.html)
 
 ```jsx
-import { getOperationType } from "stacks-utils";
+import { getOperationType } from "@blockstack/stacks-utils";
 
 const opcode = "$";
 const operation = getOperationType(opcode); // TOKEN_TRANSFER
@@ -113,7 +113,7 @@ const operation = getOperationType(opcode); // TOKEN_TRANSFER
 ### Fetch all data associated with a Stacks Address
 
 ```jsx
-import { fetchStacksAddressData } from "stacks-utils";
+import { fetchStacksAddressData } from "@blockstack/stacks-utils";
 
 const data = await fetchStacksAddressData(stacksAddress);
 ```
@@ -121,7 +121,7 @@ const data = await fetchStacksAddressData(stacksAddress);
 ### Fetch Stacks Address data from the Blockstack Explorer API
 
 ```jsx
-import { fetchStacksAddressDetails } from "stacks-utils";
+import { fetchStacksAddressDetails } from "@blockstack/stacks-utils";
 
 const data = await fetchStacksAddressDetails(stacksAddress);
 ```
@@ -129,7 +129,7 @@ const data = await fetchStacksAddressDetails(stacksAddress);
 ### Fetch all data associated with a BTC Address
 
 ```jsx
-import { fetchBtcAddressData } from "stacks-utils";
+import { fetchBtcAddressData } from "@blockstack/stacks-utils";
 
 const data = await fetchBtcAddressData(btcAddress);
 ```
@@ -139,7 +139,7 @@ const data = await fetchBtcAddressData(btcAddress);
 ### Microstacks to Stacks
 
 ```jsx
-import { microToStacks } from "stacks-utils";
+import { microToStacks } from "@blockstack/stacks-utils";
 
 const stacksAmount = microToStacks(1); // 0.000001
 ```
@@ -147,7 +147,7 @@ const stacksAmount = microToStacks(1); // 0.000001
 ### Stacks to Microstacks
 
 ```jsx
-import { stacksToMicro } from "stacks-utils";
+import { stacksToMicro } from "@blockstack/stacks-utils";
 
 const microStacksAmount = stacksToMicro(0.000001); // 1
 ```

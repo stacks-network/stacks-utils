@@ -5,12 +5,8 @@ import { microToStacks } from './units';
 
 /**
  * lookupValue
- *
- * @param {String} hashBuffer
- * @param {Number} index
- * @returns {Promise} the Number represents the value of each output of a given hash
  */
-const lookupValue = async (hashBuffer: string, index: number) => {
+const lookupValue = async (hashBuffer: string, index: number): Promise<any> => {
   try {
     const txHash = Buffer.from(hashBuffer)
       .reverse()
@@ -20,9 +16,8 @@ const lookupValue = async (hashBuffer: string, index: number) => {
     );
     const rawTx = await response.text();
     const tx = btc.Transaction.fromHex(rawTx);
-    const value = tx.outs[index].value;
-
-    return value;
+    const value = (tx.outs[index] as any).value;
+    return value as number;
   } catch (e) {
     console.error(e);
   }
@@ -34,11 +29,13 @@ const lookupValue = async (hashBuffer: string, index: number) => {
  * @param {Object} tx - the BTC transaction
  * @returns {Promise} the Number represents the difference of inputValues and outputValues (totalFeesPaid)
  */
-const getFees = async tx => {
+const getFees = async (tx: any): Promise<any> => {
   const inputValues = await Promise.all(
-    tx.ins.map(async x => lookupValue(x.hash, x.index))
-  ).then(results => results.reduce((a, b) => a + b, 0));
-  const outputValues = tx.outs.map(x => x.value).reduce((a, b) => a + b, 0);
+    tx.ins.map(async (x: any) => lookupValue(x.hash, x.index))
+    // @ts-ignore
+  ).then(results => results.reduce((a, b) => a + b, 0))
+  const outputValues = tx.outs.map((x: any) => x.value).reduce((a: number, b: number) => a + b, 0);
+  // @ts-ignore
   const totalFeesPaid = inputValues - outputValues;
   return totalFeesPaid;
 };
@@ -52,7 +49,7 @@ const getFees = async tx => {
  * @param {String} opCode - the ascii character
  * @returns {String} operation - the readable operation for a given opCode
  */
-const getOperationType = (opCode: string) => {
+const getOperationType = (opCode: string): string | null => {
   if (opCode === '$') {
     return 'TOKEN_TRANSFER';
   }
@@ -95,16 +92,18 @@ const getOperationType = (opCode: string) => {
  *
  * This will decode a raw Bitcoin hex transaction
  * and provide stacks transaction information.
- *
- * @param {String} rawTx - the hex tx to decode
- * @param {Boolean} fetchFees - bool to fetch fees or not
- * @returns {Promise} tx - the decompiled Stacks transaction
  */
 export const decodeRawTx = async (rawTx: string, fetchFees = true) => {
   const tx = btc.Transaction.fromHex(rawTx);
-  const data = btc.script.decompile(tx.outs[0].script)[1];
+  const decompiledScript = btc.script.decompile(tx.outs[0].script);
 
-  if (!data.slice) {
+  if (decompiledScript === null) {
+    return;
+  }
+
+  const data = decompiledScript[1];
+
+  if (typeof data === 'number' || !data.slice) {
     // not a blockstack transaction
     return;
   }
@@ -135,9 +134,11 @@ export const decodeRawTx = async (rawTx: string, fetchFees = true) => {
 
   const inputData = btc.script.decompile(tx.ins[0].script);
 
+  // @ts-ignore
   const hash = btc.crypto.hash160(inputData[inputData.length - 1]);
 
   const isPubKey = btc.script.isCanonicalPubKey(
+    // @ts-ignore
     inputData[inputData.length - 1]
   );
   const version = isPubKey
@@ -174,7 +175,7 @@ export const decodeRawTx = async (rawTx: string, fetchFees = true) => {
  * @param {Boolean} fetchFees - bool to fetch fees or not
  * @returns {Promise} txs - the array of decompiled Stacks transaction
  */
-export const decodeRawTxs = async (txs, fetchFees) => {
+export const decodeRawTxs = async (txs: any[], fetchFees: boolean): Promise<any> => {
   if (!txs.length) {
     return [];
   }
@@ -208,10 +209,15 @@ export const decodeRawTxs = async (txs, fetchFees) => {
     })
   );
 
-  return items
-    .filter(item => item) // remove null items
+  
+  // TypeScript not implicitly considering this filter action
+  type Tx = NonNullable<typeof items[0]>;
+  const filteredItems = items.filter(item => item) as Tx[];
+
+  return filteredItems
     .map(tx => ({
       ...tx,
-      pending: Number(tx.confirmations) < 7, // blockstack core will either accept or deny a stx tx at 7+ confirmations from the bitcoin blockchain
+      // blockstack core will either accept or deny a stx tx at 7+ confirmations from the bitcoin blockchain
+      pending: Number(tx.confirmations) < 7,
     }));
 };

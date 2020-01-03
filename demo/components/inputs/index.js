@@ -3,7 +3,7 @@ import { Input, theme, Box, Type, Scrollbars } from "blockstack-ui";
 import {
   fetchStacksAddressData,
   validateStacksAddress
-} from "stacks-utils/dist/index.umd";
+} from "@blockstack/stacks-utils";
 import debounce from "lodash.debounce";
 const AsyncStacksInput = ({
   fn,
