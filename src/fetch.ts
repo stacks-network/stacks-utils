@@ -2,6 +2,10 @@ import { decodeRawTxs } from './transactions';
 import { stacksAddressToBtcAddress } from './addresses';
 import { API_URL } from './common/constants';
 import { fetchJSON } from './common/lib';
+import {
+  BlockcypherApiResponse,
+  ExplorerApiStacksAddressResponse,
+} from './fetch.types';
 
 /**
  * fetchStacksAddressDetails
@@ -9,7 +13,6 @@ import { fetchJSON } from './common/lib';
  * Fetches data for a given Stacks address from the Blockstack Explorer API.
  * Contains data about allocations and confirmed Stacks transactions.
  *
- * @param {String} address - the Stacks address
  */
 export const fetchStacksAddressDetails = async (address: string) => {
   let data = null;
@@ -30,14 +33,16 @@ export const fetchStacksAddressDetails = async (address: string) => {
  *
  * TODO: for accounts with 50+ transactions, we'll have to paginate
  */
-export const fetchBtcAddressData = async (btcAddress: string) => {
+export const fetchBtcAddressData = async (
+  btcAddress: string
+): Promise<BlockcypherApiResponse> => {
   try {
     const response = await fetch(
       `https://api.blockcypher.com/v1/btc/main/addrs/${btcAddress}/full?includeHex=true&limit=50`
     );
     return response.json();
   } catch (e) {
-    console.error(e);
+    return Promise.reject(e);
   }
 };
 
@@ -48,7 +53,9 @@ export const fetchBtcAddressData = async (btcAddress: string) => {
  * BTC transaction data for the given Stacks address. The BTC tx data will allow us
  * to gather information about pending/invalid Stacks transactions.
  */
-export const fetchStacksAddressData = async (stacksAddress: string) => {
+export const fetchStacksAddressData = async (
+  stacksAddress: string
+): Promise<ExplorerApiStacksAddressResponse> => {
   const btcAddress = stacksAddressToBtcAddress(stacksAddress);
 
   // fetch data from blockcypher and from the blockstack explorer api
@@ -86,7 +93,8 @@ export const fetchStacksAddressData = async (stacksAddress: string) => {
         (data &&
           data.history &&
           data.history.find(
-            (historicalTx: any) => historicalTx && historicalTx.txid === thisTx.txid
+            (historicalTx: any) =>
+              historicalTx && historicalTx.txid === thisTx.txid
           )) ||
         {};
       return {

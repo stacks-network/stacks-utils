@@ -1,4 +1,4 @@
-import { network, transactions, config } from 'blockstack';
+import { transactions, config } from 'blockstack';
 import Transport from '@ledgerhq/hw-transport-node-hid';
 import btc from 'bitcoinjs-lib';
 import { TrezorSigner } from 'blockstack-trezor';
