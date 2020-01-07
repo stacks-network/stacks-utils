@@ -47,7 +47,7 @@ export const WALLET_TYPES = {
   WATCH_ONLY: 'wallet_types/WATCH_ONLY',
   LEDGER: 'wallet_types/LEDGER',
   TREZOR: 'wallet_types/TREZOR',
-};
+} as const;
 
 /**
  * URLS

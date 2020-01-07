@@ -20,7 +20,6 @@ import { toBigInt, sumUTXOs } from './units';
  * @param {string} walletType - one of WALLET_TYPES.TREZOR or WALLET_TYPES.LEDGER
  * @param {string} memo - the message for the tx
  */
-
 const prepareTransaction = async (
   senderAddress,
   recipientAddress,

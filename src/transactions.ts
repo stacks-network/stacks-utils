@@ -3,6 +3,21 @@ import bigi from 'bigi';
 import { b58ToC32 } from 'c32check';
 import { microToStacks } from './units';
 
+interface DecodedTransaction {
+  sender: string;
+  senderBitcoinAddress: string;
+  recipient: string;
+  recipientBitcoinAddress: string;
+  opcode: string;
+  operation: string | null;
+  consensusHash: string;
+  tokenType: string;
+  tokenAmount: object;
+  tokenAmountReadable: number;
+  memo: string;
+  fees: number;
+}
+
 /**
  * lookupValue
  */
@@ -33,8 +48,10 @@ const getFees = async (tx: any): Promise<any> => {
   const inputValues = await Promise.all(
     tx.ins.map(async (x: any) => lookupValue(x.hash, x.index))
     // @ts-ignore
-  ).then(results => results.reduce((a, b) => a + b, 0))
-  const outputValues = tx.outs.map((x: any) => x.value).reduce((a: number, b: number) => a + b, 0);
+  ).then(results => results.reduce((a, b) => a + b, 0));
+  const outputValues = tx.outs
+    .map((x: any) => x.value)
+    .reduce((a: number, b: number) => a + b, 0);
   // @ts-ignore
   const totalFeesPaid = inputValues - outputValues;
   return totalFeesPaid;
@@ -93,7 +110,10 @@ const getOperationType = (opCode: string): string | null => {
  * This will decode a raw Bitcoin hex transaction
  * and provide stacks transaction information.
  */
-export const decodeRawTx = async (rawTx: string, fetchFees = true) => {
+export const decodeRawTx = async (
+  rawTx: string,
+  fetchFees = true
+): Promise<DecodedTransaction | undefined> => {
   const tx = btc.Transaction.fromHex(rawTx);
   const decompiledScript = btc.script.decompile(tx.outs[0].script);
 
@@ -175,7 +195,10 @@ export const decodeRawTx = async (rawTx: string, fetchFees = true) => {
  * @param {Boolean} fetchFees - bool to fetch fees or not
  * @returns {Promise} txs - the array of decompiled Stacks transaction
  */
-export const decodeRawTxs = async (txs: any[], fetchFees: boolean): Promise<any> => {
+export const decodeRawTxs = async (
+  txs: any[],
+  fetchFees: boolean
+): Promise<(DecodedTransaction | undefined)[]> => {
   if (!txs.length) {
     return [];
   }
@@ -209,15 +232,13 @@ export const decodeRawTxs = async (txs: any[], fetchFees: boolean): Promise<any>
     })
   );
 
-  
   // TypeScript not implicitly considering this filter action
   type Tx = NonNullable<typeof items[0]>;
   const filteredItems = items.filter(item => item) as Tx[];
 
-  return filteredItems
-    .map(tx => ({
-      ...tx,
-      // blockstack core will either accept or deny a stx tx at 7+ confirmations from the bitcoin blockchain
-      pending: Number(tx.confirmations) < 7,
-    }));
+  return filteredItems.map(tx => ({
+    ...tx,
+    // blockstack core will either accept or deny a stx tx at 7+ confirmations from the bitcoin blockchain
+    pending: Number(tx.confirmations) < 7,
+  }));
 };
