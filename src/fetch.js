@@ -70,15 +70,15 @@ const fetchStacksAddressData = async stacksAddress => {
   // decode the raw tx to get at the stacks data
   const transactionsWithStacksData = await decodeRawTxs(txs, false);
 
+  const history = (data && data.history) ? data.history : [];
+
   // determine if the stacks transaction is valid or not (accepted by Blockstack Core)
   const transactionsWithStacksDataWithInvalidState = transactionsWithStacksData.map(
     tx => ({
       ...tx,
       invalid:
-        Number(tx.confirmations) >= 7 &&
-        data &&
-        data.history &&
-        !data.history.find(historical => historical.txid === tx.txid) // if this is true, and has 7+ confirmations, it's an invalid stacks tx
+        Number(tx.confirmations) >= 10 &&
+        !history.find(historical => historical.txid === tx.txid) // if this is true, and has 10+ confirmations, it's an invalid stacks tx
     })
   );
 
