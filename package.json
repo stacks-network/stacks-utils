@@ -1,6 +1,6 @@
 {
   "name": "@blockstack/stacks-utils",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Utilities for the Stacks blockchain.",
   "scripts": {
     "build": "microbundle",
@@ -20,7 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "bigi": "^1.4.2",
-    "bitcoinjs-lib": "^4.0.2",
+    "bitcoinjs-lib": "^4.0.5",
     "blockstack": "^18.1.0",
     "c32check": "^0.0.6",
     "crypto": "^1.0.1"
